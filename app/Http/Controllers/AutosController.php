@@ -26,7 +26,7 @@ class AutosController extends Controller
         $paginated = Auto::query()->search($request->validated());
 
         return response()->json([
-            'data' => AutoResource::collection($paginated),
+            'paginated' => AutoResource::collection($paginated),
         ]);
     }
 
