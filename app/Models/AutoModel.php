@@ -30,6 +30,6 @@ class AutoModel extends Model
 
     public function make(): BelongsTo
     {
-        return $this->belongsTo(AutoMake::class);
+        return $this->belongsTo(AutoMake::class, 'make_id', 'make_id');
     }
 }
