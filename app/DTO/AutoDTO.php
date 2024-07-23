@@ -17,7 +17,7 @@ class AutoDTO implements CastsToFillable
     {
         return [
             'brand' => $this->brand,
-            'model_id' => $this->model,
+            'model' => $this->model,
             'year' => $this->year,
         ];
     }
