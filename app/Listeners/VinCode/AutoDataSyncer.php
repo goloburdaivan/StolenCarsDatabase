@@ -30,10 +30,6 @@ class AutoDataSyncer implements ShouldQueue
         $auto = $event->auto;
 
         $data = $this->client->getAutoInfoByVIN($auto->vin_code);
-        $this->autosRepository->update($auto, [
-            'brand' => $data->brand,
-            'model' => $data->model,
-            'year' => $data->year,
-        ]);
+        $this->autosRepository->update($auto, $data->toFillable());
     }
 }
