@@ -2,4 +2,4 @@
 
 use Illuminate\Support\Facades\Schedule;
 
-Schedule::command('app:fetch-auto-data')->monthly();
+Schedule::command('app:parse-marks-with-models')->monthly();

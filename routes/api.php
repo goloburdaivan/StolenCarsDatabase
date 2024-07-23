@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AutoMakesController;
 use App\Http\Controllers\AutosController;
 use Illuminate\Support\Facades\Route;
 
@@ -9,4 +10,8 @@ Route::controller(AutosController::class)->group(function () {
     Route::patch('/autos/{auto}', 'update')->name('autos.update');
     Route::delete('/autos/{auto}', 'destroy')->name('autos.destroy');
     Route::get('/autos/export', 'export')->name('autos.export');
+});
+
+Route::controller(AutoMakesController::class)->group(function () {
+    Route::get('/auto-makes/autocomplete', 'autoComplete')->name('auto-makes.autocomplete');
 });

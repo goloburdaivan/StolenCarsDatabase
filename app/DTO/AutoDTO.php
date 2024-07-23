@@ -2,12 +2,23 @@
 
 namespace App\DTO;
 
-class AutoDTO
+use App\Contracts\CastsToFillable;
+
+class AutoDTO implements CastsToFillable
 {
     public function __construct(
       public ?string $brand,
       public ?string $model,
       public ?int $year,
     ) {
+    }
+
+    public function toFillable(): array
+    {
+        return [
+            'brand' => $this->brand,
+            'model_id' => $this->model,
+            'year' => $this->year,
+        ];
     }
 }
