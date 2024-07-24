@@ -260,16 +260,16 @@ components:
           example: 1
         vin_code:
           type: string
-          example: "1HGBH41JXMN109186"
+          example: "3VWDP7AJ7DM356782"
         plate_number:
           type: string
-          example: "ABC123"
+          example: "guiutoier"
         color:
           type: string
-          example: "Red"
+          example: "53wtre"
         name:
           type: string
-          example: "Honda Civic"
+          example: "ytrtry"
         created_at:
           type: string
           format: date-time
@@ -281,30 +281,36 @@ components:
     AutoCreate:
       type: object
       properties:
-        vin_code:
-          type: string
-          example: "1HGBH41JXMN109186"
-        plate_number:
-          type: string
-          example: "ABC123"
-        color:
-          type: string
-          example: "Red"
-        name:
-          type: string
-          example: "Honda Civic"
+        auto:
+          type: object
+          properties:
+            vin_code:
+              type: string
+              example: "3VWDP7AJ7DM356782"
+            plate_number:
+              type: string
+              example: "guiutoier"
+            color:
+              type: string
+              example: "53wtre"
+            name:
+              type: string
+              example: "ytrtry"
     AutoUpdate:
       type: object
       properties:
-        vin_code:
-          type: string
-          example: "1HGBH41JXMN109186"
-        plate_number:
-          type: string
-          example: "ABC123"
-        color:
-          type: string
-          example: "Red"
-        name:
-          type: string
-          example: "Honda Civic"
+        auto:
+          type: object
+          properties:
+            vin_code:
+              type: string
+              example: "3VWDP7AJ7DM356782"
+            plate_number:
+              type: string
+              example: "guiutoier"
+            color:
+              type: string
+              example: "53wtre"
+            name:
+              type: string
+              example: "ytrtry"
