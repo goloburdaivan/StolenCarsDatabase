@@ -1,0 +1,310 @@
+openapi: 3.0.0
+info:
+  title: Autos API
+  description: API documentation for managing autos.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local server
+paths:
+  /autos:
+    get:
+      summary: Get list of autos
+      operationId: listAutos
+      tags:
+        - Autos
+      parameters:
+        - name: q
+          in: query
+          description: Search query
+          required: false
+          schema:
+            type: string
+        - name: color
+          in: query
+          description: Color filter
+          required: false
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+            enum:
+              - id
+              - vin_code
+              - plate_number
+              - brand
+              - model
+              - year
+              - color
+              - name
+              - created_at
+              - updated_at
+        - name: sort_type
+          in: query
+          description: Sort direction
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: brand
+          in: query
+          description: Brand filter
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: model
+          in: query
+          description: Model filter
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: year
+          in: query
+          description: Year filter
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        '200':
+          description: A paginated list of autos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  paginated:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Auto'
+    post:
+      summary: Create a new auto
+      operationId: createAuto
+      tags:
+        - Autos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoCreate'
+      responses:
+        '201':
+          description: Auto created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Auto'
+  /autos/{autoId}:
+    patch:
+      summary: Update an existing auto
+      operationId: updateAuto
+      tags:
+        - Autos
+      parameters:
+        - name: autoId
+          in: path
+          description: ID of the auto to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutoUpdate'
+      responses:
+        '200':
+          description: Auto updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Auto'
+    delete:
+      summary: Delete an existing auto
+      operationId: deleteAuto
+      tags:
+        - Autos
+      parameters:
+        - name: autoId
+          in: path
+          description: ID of the auto to delete
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Auto deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  auto:
+                    $ref: '#/components/schemas/Auto'
+  /autos/export:
+    get:
+      summary: Export autos data
+      operationId: exportAutos
+      tags:
+        - Autos
+      parameters:
+        - name: q
+          in: query
+          description: Search query
+          required: false
+          schema:
+            type: string
+        - name: color
+          in: query
+          description: Color filter
+          required: false
+          schema:
+            type: string
+        - name: sort_by
+          in: query
+          description: Field to sort by
+          required: false
+          schema:
+            type: string
+            enum:
+              - id
+              - vin_code
+              - plate_number
+              - brand
+              - model
+              - year
+              - color
+              - name
+              - created_at
+              - updated_at
+        - name: sort_type
+          in: query
+          description: Sort direction
+          required: false
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+        - name: brand
+          in: query
+          description: Brand filter
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: model
+          in: query
+          description: Model filter
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: year
+          in: query
+          description: Year filter
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        '200':
+          description: Export file
+          content:
+            application/vnd.ms-excel:
+              schema:
+                type: string
+                format: binary
+  /auto-makes/autocomplete:
+    get:
+      summary: Get auto makes autocomplete
+      operationId: autoComplete
+      tags:
+        - AutoMakes
+      responses:
+        '200':
+          description: List of auto makes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+components:
+  schemas:
+    Auto:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        vin_code:
+          type: string
+          example: "1HGBH41JXMN109186"
+        plate_number:
+          type: string
+          example: "ABC123"
+        color:
+          type: string
+          example: "Red"
+        name:
+          type: string
+          example: "Honda Civic"
+        created_at:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00Z"
+    AutoCreate:
+      type: object
+      properties:
+        vin_code:
+          type: string
+          example: "1HGBH41JXMN109186"
+        plate_number:
+          type: string
+          example: "ABC123"
+        color:
+          type: string
+          example: "Red"
+        name:
+          type: string
+          example: "Honda Civic"
+    AutoUpdate:
+      type: object
+      properties:
+        vin_code:
+          type: string
+          example: "1HGBH41JXMN109186"
+        plate_number:
+          type: string
+          example: "ABC123"
+        color:
+          type: string
+          example: "Red"
+        name:
+          type: string
+          example: "Honda Civic"
