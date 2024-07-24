@@ -7,7 +7,7 @@ servers:
   - url: http://localhost:8000
     description: Local server
 paths:
-  /autos:
+  /api/autos:
     get:
       summary: Get list of autos
       operationId: listAutos
@@ -17,12 +17,6 @@ paths:
         - name: q
           in: query
           description: Search query
-          required: false
-          schema:
-            type: string
-        - name: color
-          in: query
-          description: Color filter
           required: false
           schema:
             type: string
@@ -106,7 +100,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Auto'
-  /autos/{autoId}:
+  /api/autos/{autoId}:
     patch:
       summary: Update an existing auto
       operationId: updateAuto
@@ -158,7 +152,7 @@ paths:
                     type: string
                   auto:
                     $ref: '#/components/schemas/Auto'
-  /autos/export:
+  /api/autos/export:
     get:
       summary: Export autos data
       operationId: exportAutos
@@ -235,7 +229,7 @@ paths:
               schema:
                 type: string
                 format: binary
-  /auto-makes/autocomplete:
+  /api//auto-makes/autocomplete:
     get:
       summary: Get auto makes autocomplete
       operationId: autoComplete

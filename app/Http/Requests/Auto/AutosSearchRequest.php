@@ -24,7 +24,6 @@ class AutosSearchRequest extends FormRequest
     {
         return [
             'q' => ['string'],
-            'color' => ['string'],
             'sort_by' => Rule::in(array_keys($this->getSortableFields())),
             'sort_type' => Rule::in(['asc', 'desc']),
             'brand' => ['array'],
