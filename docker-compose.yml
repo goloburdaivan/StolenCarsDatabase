@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+    web:
+        image: app-name:latest
+        build:
+            target: web
+            context: .
+        env_file:
+            - .env
+        ports:
+            - "8000:80"
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - db
+            - worker
+
+    db:
+        platform: "linux/amd64"
+        image: mysql:8.0
+        env_file:
+            - .env
+        environment:
+            MYSQL_ROOT_PASSWORD: root123123
+            MYSQL_DATABASE: autos
+            MYSQL_USER: app
+            MYSQL_PASSWORD: root123123
+        ports:
+            - "3307:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+
+    worker:
+        image: app-name:latest
+        build:
+            target: web
+            context: .
+        env_file:
+            - .env
+        volumes:
+            - .:/var/www/html
+        command: php artisan queue:work
+        depends_on:
+            - db
+
+volumes:
+    dbdata:
