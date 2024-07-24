@@ -11,10 +11,6 @@ class AutoQueryBuilder extends Builder
 
     public function searchQuery(array $args): static
     {
-        if (!empty($args['color'])) {
-            $this->where('color', $args['color']);
-        }
-
         if (!empty($args['brand'])) {
             $this->whereIn('brand', $args['brand']);
         }
